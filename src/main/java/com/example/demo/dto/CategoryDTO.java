@@ -11,11 +11,11 @@ public class CategoryDTO {
 	}
 
 	public CategoryDTO(Long id, String name) {
+		super();
 		this.id = id;
 		this.name = name;
 	}
 	
-	// Copia da entity - Converte Entity para DTO
 	public CategoryDTO(Category category) {
 		id = category.getId();
 		name = category.getName();

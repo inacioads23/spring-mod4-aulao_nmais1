@@ -28,10 +28,12 @@ public class DemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
+		// cria a categoria
 		Category c1 = new Category(null, "Mobile");
 		Category c2 = new Category(null, "Computers");
-		Category c3 = new Category(null, "Electronics");
+		Category c3 = new Category(null, "Electronics");		 
 
+		// cria o produto
 		Product p1 = new Product(null, "P1");
 		Product p2 = new Product(null, "P2");
 		Product p3 = new Product(null, "P3");
@@ -41,8 +43,11 @@ public class DemoApplication implements CommandLineRunner {
 		Product p7 = new Product(null, "P7");
 		Product p8 = new Product(null, "P8");
 		Product p9 = new Product(null, "P9");
-		Product p10 = new Product(null, "P10");
-
+		Product p10 = new Product(null, "P10");	
+		
+		categoryRepository.saveAll(Arrays.asList(c1, c2, c3)); // Primeiro salva a categoria para depois associar
+		
+		// associa o produto a categoria
 		p1.getCategories().addAll(Arrays.asList(c1, c2));
 		p2.getCategories().addAll(Arrays.asList(c1, c3));
 		p3.getCategories().addAll(Arrays.asList(c2, c3));
@@ -52,10 +57,10 @@ public class DemoApplication implements CommandLineRunner {
 		p7.getCategories().addAll(Arrays.asList(c1));
 		p8.getCategories().addAll(Arrays.asList(c3));
 		p9.getCategories().addAll(Arrays.asList(c2, c3));
-		p10.getCategories().addAll(Arrays.asList(c1, c3));
+		p10.getCategories().addAll(Arrays.asList(c1, c3));	
 		
-		categoryRepository.saveAll(Arrays.asList(c1, c2, c3));
-		
+		//salva o produto por último
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));
+		
 	}
 }

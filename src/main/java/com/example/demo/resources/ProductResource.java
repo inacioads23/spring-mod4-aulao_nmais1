@@ -1,5 +1,7 @@
 package com.example.demo.resources;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +21,8 @@ public class ProductResource {
 	@Autowired
 	private ProductService service;
 	
-	@GetMapping
+	
+	@GetMapping()
 	public ResponseEntity<Page<ProductDTO>> findAll(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "size", defaultValue = "10") Integer size
@@ -27,6 +30,30 @@ public class ProductResource {
 		
 		PageRequest pageRequest = PageRequest.of(page, size);
 		Page<ProductDTO> list = service.find(pageRequest);
+		return ResponseEntity.ok(list);
+	}
+	
+	
+	// Sem paginação
+	@GetMapping("/find1")
+	public ResponseEntity<List<ProductDTO>> findAll1(
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "size", defaultValue = "10") Integer size
+			) {
+		
+		PageRequest pageRequest = PageRequest.of(page, size);
+		List<ProductDTO> list = service.find1(pageRequest);
+		return ResponseEntity.ok(list);
+	}
+	
+	@GetMapping("/find2")
+	public ResponseEntity<Page<ProductDTO>> findAll2(
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "size", defaultValue = "10") Integer size
+			) {
+		
+		PageRequest pageRequest = PageRequest.of(page, size);
+		Page<ProductDTO> list = service.find2(pageRequest);
 		return ResponseEntity.ok(list);
 	}
 }
