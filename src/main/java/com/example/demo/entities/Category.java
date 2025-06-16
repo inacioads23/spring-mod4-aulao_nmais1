@@ -21,7 +21,7 @@ public class Category {
 	private String name;
 
 	@ManyToMany(mappedBy = "categories")
-	private Set<Product> products = new HashSet<>();
+	private Set<Product> products = new HashSet<>(); // Não permite duplicação no resultado
 
 	public Category() {
 	}
