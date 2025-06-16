@@ -34,7 +34,7 @@ public class ProductResource {
 	}
 	
 	
-	// Sem paginação
+	// Sem paginação - Pode dar erro em versões antiga do java
 	@GetMapping("/find1")
 	public ResponseEntity<List<ProductDTO>> findAll1(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -46,6 +46,7 @@ public class ProductResource {
 		return ResponseEntity.ok(list);
 	}
 	
+	// Com paginação
 	@GetMapping("/find2")
 	public ResponseEntity<Page<ProductDTO>> findAll2(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,

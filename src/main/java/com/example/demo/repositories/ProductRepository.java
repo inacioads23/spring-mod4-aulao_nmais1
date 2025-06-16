@@ -9,18 +9,17 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.example.demo.entities.Product;
 
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {	
+	
+	//Com paginação. Pode dar erro em versões antiga do java. Por padrão 'JOIN FETCH' não lida bem com 'Page'
+	//JPQL        Alias   Class Entity                junção nas tables (Ver ClassProduct - line 29)
+	@Query("SELECT obj FROM Product obj JOIN FETCH obj.categories")
+	Page<Product> findProductsCategories(Pageable pageable);
 	
 	//Sem paginação
 	//JPQL        Alias   Class Entity                junção nas tables (Ver ClassProduct - line 29)
 	@Query("SELECT obj FROM Product obj JOIN FETCH obj.categories")
 	List<Product> findProductsCategories1();
-	
-	
-	//Com paginação
-	//JPQL        Alias   Class Entity                junção nas tables (Ver ClassProduct - line 29)
-	@Query("SELECT obj FROM Product obj JOIN FETCH obj.categories")
-	Page<Product> findProductsCategories(Pageable pageable);
 	
 	
 	//Com paginação

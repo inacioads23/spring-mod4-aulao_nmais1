@@ -25,15 +25,13 @@ public class ProductService {
 		Page<Product> list = repository.findAll(pageRequest);
 		return list.map(x -> new ProductDTO(x));
 	}
-	
-	
+		
 	@Transactional(readOnly = true)
 	public List<ProductDTO> find1(PageRequest pageRequest) {
 		List<Product> list = repository.findProductsCategories1();
 		// converter para DTO
 		return list.stream().map(x -> new ProductDTO(x)).collect(Collectors.toList());
 	}
-
 	
 	@Transactional(readOnly = true)
 	public Page<ProductDTO> find2(PageRequest pageRequest) {
